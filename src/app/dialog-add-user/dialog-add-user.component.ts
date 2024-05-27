@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -8,6 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { User } from '../../models/user.class';
 import { FormsModule } from '@angular/forms';
+import { Firestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -28,6 +29,7 @@ import { FormsModule } from '@angular/forms';
 export class DialogAddUserComponent {
   user = new User();
   birthDate!: Date;
+  firestore = inject(Firestore);
 
   saveUser() {
     this.user.birthDate = this.birthDate.getTime(); // wandelt Datum in Timestamp um
