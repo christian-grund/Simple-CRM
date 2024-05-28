@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -35,15 +35,16 @@ export class DialogAddUserComponent {
   birthDate!: Date;
   loading: boolean = false;
 
-  constructor(private firebase: FirebaseService) {}
+  constructor(
+    private firebase: FirebaseService,
+    public dialogRef: MatDialogRef<DialogAddUserComponent>
+  ) {}
 
   async saveUser() {
     this.user.birthDate = this.birthDate.getTime(); // wandelt Datum in Timestamp um
-    console.log('Current user is:', this.user);
     this.loading = true;
-    console.log('loading = true');
     await this.firebase.addUserToFirebase(this.user);
     this.loading = false;
-    console.log('loading = false');
+    this.dialogRef.close();
   }
 }
