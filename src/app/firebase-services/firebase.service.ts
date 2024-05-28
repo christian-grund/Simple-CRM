@@ -9,14 +9,16 @@ import { User } from '../../models/user.class';
 export class FirebaseService {
   firestore: Firestore = inject(Firestore);
 
-  async addUserToFirebase(user: User) {
-    addDoc(collection(this.firestore, 'users'), user.toJSON())
-      .catch((err) => {
-        console.error(err);
-      })
-      .then((user) => {
-        console.log('Document written with ID: ', user);
-      });
+  async addUserToFirebase(user: User): Promise<void> {
+    try {
+      const userDoc = await addDoc(
+        collection(this.firestore, 'users'),
+        user.toJSON()
+      );
+      console.log('Document written with ID: ', userDoc.id);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   // getUserRef() {
