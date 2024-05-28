@@ -1,12 +1,12 @@
 // import { FormsModule } from '@angular/forms';
 
 export class User {
-  firstName: string;
-  lastName: string;
-  birthDate: number; // Timestamp kann einfach in Firebase gespeichert werden
-  street: string;
-  zipCode: number;
-  city: string;
+  public firstName: string;
+  public lastName: string;
+  public birthDate: number; // Timestamp kann einfach in Firebase gespeichert werden
+  public street: string;
+  public zipCode: number;
+  public city: string;
 
   // ?: Object kann optional angelegt werden
   constructor(obj?: any) {
@@ -16,6 +16,17 @@ export class User {
     this.street = obj ? obj.street : '';
     this.zipCode = obj ? obj.zipCode : '';
     this.city = obj ? obj.city : '';
+  }
+
+  public toJSON() {
+    return {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      birthDate: this.birthDate,
+      street: this.street,
+      zipCode: this.zipCode,
+      city: this.city,
+    };
   }
 
   //   new User(); -> hier könnte ein neuer User angelegt werden, ohne dass das Object benötigt wird

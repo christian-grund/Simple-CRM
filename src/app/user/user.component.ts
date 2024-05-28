@@ -18,7 +18,7 @@ export class UserComponent {
   positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
   position = new FormControl(this.positionOptions[1]);
 
-  user = new User();
+  // user = new User();
 
   constructor(public dialog: MatDialog) {}
 

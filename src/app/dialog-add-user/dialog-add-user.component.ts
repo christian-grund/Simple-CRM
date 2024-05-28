@@ -8,7 +8,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { User } from '../../models/user.class';
 import { FormsModule } from '@angular/forms';
-import { Firestore } from '@angular/fire/firestore';
+// import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+// import { CollectionReference, DocumentData } from '@firebase/firestore';
+import { FirebaseService } from '../firebase-services/firebase.service';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -29,10 +31,14 @@ import { Firestore } from '@angular/fire/firestore';
 export class DialogAddUserComponent {
   user = new User();
   birthDate!: Date;
-  firestore = inject(Firestore);
+  // firestore: Firestore = inject(Firestore);
 
-  saveUser() {
+  constructor(private firebase: FirebaseService) {}
+
+  async saveUser() {
     this.user.birthDate = this.birthDate.getTime(); // wandelt Datum in Timestamp um
     console.log('Current user is:', this.user);
+
+    await this.firebase.addUserToFirebase(this.user);
   }
 }
