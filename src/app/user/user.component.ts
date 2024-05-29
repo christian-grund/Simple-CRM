@@ -10,8 +10,8 @@ import { FirebaseService } from '../firebase-services/firebase.service';
 import { onSnapshot } from 'firebase/firestore';
 import { collection } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-
 import { User } from '../../models/user.class';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -23,6 +23,7 @@ import { User } from '../../models/user.class';
     MatDialogModule,
     MatCardModule,
     CommonModule,
+    RouterLink,
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
@@ -46,8 +47,8 @@ export class UserComponent implements OnDestroy {
     return onSnapshot(
       collection(this.firebaseService.firestore, 'users'),
       (changes) => {
-        changes.forEach((element) => {
-          const userData = element.data() as User;
+        changes.forEach((doc) => {
+          const userData = { id: doc.id, ...doc.data() } as User;
           this.allUsers.push(userData);
         });
       }
