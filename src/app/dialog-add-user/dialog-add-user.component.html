@@ -103,8 +103,16 @@
       </mat-form-field>
     </div>
   </mat-dialog-content>
+
   <mat-dialog-actions>
-    <button [disabled]="loading" mat-button [disabled]="loading">Cancel</button>
+    <button
+      [disabled]="loading"
+      mat-button
+      [disabled]="loading"
+      (click)="dialogRef.close()"
+    >
+      Cancel
+    </button>
     <button
       [disabled]="loading"
       mat-button
