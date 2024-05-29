@@ -3,6 +3,7 @@
 export class User {
   public firstName: string;
   public lastName: string;
+  public email: string;
   public birthDate: number; // Timestamp kann einfach in Firebase gespeichert werden
   public street: string;
   public zipCode: number;
@@ -12,6 +13,7 @@ export class User {
   constructor(obj?: any) {
     this.firstName = obj ? obj.firstName : ''; // wenn object existiert, kommt obj.firstName rein, ansonsten '';
     this.lastName = obj ? obj.lastName : '';
+    this.email = obj ? obj.email : '';
     this.birthDate = obj ? obj.birthDate : '';
     this.street = obj ? obj.street : '';
     this.zipCode = obj ? obj.zipCode : '';
@@ -22,6 +24,7 @@ export class User {
     return {
       firstName: this.firstName,
       lastName: this.lastName,
+      email: this.email,
       birthDate: this.birthDate,
       street: this.street,
       zipCode: this.zipCode,
