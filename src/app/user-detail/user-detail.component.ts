@@ -5,13 +5,14 @@ import { FirebaseService } from "../firebase-services/firebase.service";
 import { collection, doc, onSnapshot } from "@angular/fire/firestore";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { MatMenuModule } from "@angular/material/menu";
 
 import { User } from "../../models/user.class";
 
 @Component({
   selector: "app-user-detail",
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatButtonModule],
+  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule],
   templateUrl: "./user-detail.component.html",
   styleUrl: "./user-detail.component.scss"
 })
@@ -47,5 +48,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  openAdressDialog() {}
+  editUserDetail() {}
+
+  editMenu() {}
 }
