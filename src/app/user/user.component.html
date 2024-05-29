@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card ngSkipHydration>
   <!-- <mat-card-content>Simple card</mat-card-content> -->
   <table class="user-table">
     <tr>
@@ -6,16 +6,10 @@
       <th>E-Mail</th>
       <th>City</th>
     </tr>
-    <tr>
+    <tr *ngFor="let user of allUsers">
+      <td>{{ user.firstName }}</td>
       <td>asdasd</td>
-      <td>asdasd</td>
-      <td>asdasd</td>
-    </tr>
-
-    <tr>
-      <td>asdasd</td>
-      <td>asdasd</td>
-      <td>asdasd</td>
+      <td>{{ user.city }}</td>
     </tr>
   </table>
 </mat-card>
