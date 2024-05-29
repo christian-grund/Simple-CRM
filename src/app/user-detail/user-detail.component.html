@@ -10,6 +10,11 @@
   <mat-card-header>
     <mat-card-title>Address</mat-card-title>
   </mat-card-header>
+
+  <button mat-icon-button class="pin-right-upper-corner" (click)="openAdressDialog()">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
   <mat-card-content>
     {{ user.street }} <br />
     {{ user.zipCode }} {{ user.city }}

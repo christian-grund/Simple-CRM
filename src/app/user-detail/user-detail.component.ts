@@ -3,12 +3,15 @@ import { MatCardModule } from "@angular/material/card";
 import { ActivatedRoute } from "@angular/router";
 import { FirebaseService } from "../firebase-services/firebase.service";
 import { collection, doc, onSnapshot } from "@angular/fire/firestore";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+
 import { User } from "../../models/user.class";
 
 @Component({
   selector: "app-user-detail",
   standalone: true,
-  imports: [MatCardModule],
+  imports: [MatCardModule, MatIconModule, MatButtonModule],
   templateUrl: "./user-detail.component.html",
   styleUrl: "./user-detail.component.scss"
 })
@@ -43,4 +46,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       this.unsubUser();
     }
   }
+
+  openAdressDialog() {}
 }
