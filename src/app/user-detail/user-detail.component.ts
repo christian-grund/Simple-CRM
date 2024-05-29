@@ -8,6 +8,9 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 
 import { User } from "../../models/user.class";
+import { MatDialog } from "@angular/material/dialog";
+import { DialogEditAddressComponent } from "../dialog-edit-address/dialog-edit-address.component";
+import { DialogEditUserComponent } from "../dialog-edit-user/dialog-edit-user.component";
 
 @Component({
   selector: "app-user-detail",
@@ -21,7 +24,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   user: User = new User();
   unsubUser!: () => void;
 
-  constructor(private route: ActivatedRoute, private firebaseService: FirebaseService) {}
+  constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get("id");
@@ -48,7 +51,11 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  editUserDetail() {}
+  editUserDetail() {
+    this.dialog.open(DialogEditUserComponent);
+  }
 
-  editMenu() {}
+  editMenu() {
+    this.dialog.open(DialogEditAddressComponent);
+  }
 }
