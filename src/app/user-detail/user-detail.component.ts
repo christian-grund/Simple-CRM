@@ -38,7 +38,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     return onSnapshot(userDocRef, user => {
       if (user.exists()) {
         this.user = new User(user.data());
-        console.log("user:", this.user);
+        // console.log("user:", this.user);
       } else {
         console.log("No such document!");
       }
@@ -52,10 +52,12 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   editUserDetail() {
-    this.dialog.open(DialogEditUserComponent);
+    const dialog = this.dialog.open(DialogEditUserComponent);
+    dialog.componentInstance.user = this.user;
   }
 
-  editMenu() {
-    this.dialog.open(DialogEditAddressComponent);
+  editUserAddress() {
+    const dialog = this.dialog.open(DialogEditAddressComponent);
+    dialog.componentInstance.user = this.user;
   }
 }
