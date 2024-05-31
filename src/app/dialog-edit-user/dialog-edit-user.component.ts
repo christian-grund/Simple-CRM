@@ -11,6 +11,7 @@ import { CommonModule } from "@angular/common";
 import { FirebaseService } from "../firebase-services/firebase.service";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { provideNativeDateAdapter } from "@angular/material/core";
+import { collection, doc, updateDoc } from "@angular/fire/firestore";
 
 @Component({
   selector: "app-dialog-edit-user",
@@ -22,12 +23,19 @@ import { provideNativeDateAdapter } from "@angular/material/core";
 })
 export class DialogEditUserComponent {
   user!: User;
+  userId!: string;
   birthDate!: Date;
   loading: boolean = false;
 
-  constructor(private firebase: FirebaseService, public dialogRef: MatDialogRef<DialogEditUserComponent>) {}
+  constructor(private firebaseService: FirebaseService, public dialogRef: MatDialogRef<DialogEditUserComponent>) {}
 
-  saveUser() {
-    console.log("saveUser() edit-user");
+  async saveUser() {
+    // this.user.id = this.userId;
+    this.loading = true;
+    const userDocRef = doc(collection(this.firebaseService.firestore, "users"), this.userId);
+    const userData = this.user.toJSON();
+    await updateDoc(userDocRef, userData);
+    this.loading = false;
+    this.dialogRef.close();
   }
 }

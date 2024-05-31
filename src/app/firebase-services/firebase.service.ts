@@ -1,29 +1,27 @@
-import { Injectable, inject } from '@angular/core';
-import { Firestore, doc } from '@angular/fire/firestore';
-import { collection, addDoc } from 'firebase/firestore';
-import { User } from '../../models/user.class';
+import { Injectable, inject } from "@angular/core";
+import { Firestore, doc, updateDoc } from "@angular/fire/firestore";
+import { collection, addDoc } from "firebase/firestore";
+import { User } from "../../models/user.class";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class FirebaseService {
   firestore: Firestore = inject(Firestore);
 
   async addUserToFirebase(user: User): Promise<void> {
     try {
-      const userDoc = await addDoc(
-        collection(this.firestore, 'users'),
-        user.toJSON()
-      );
-      console.log('Document written with ID: ', userDoc.id);
+      const userDocRef = await addDoc(collection(this.firestore, "users"), user.toJSON());
+      user.id = userDocRef.id;
+      await updateDoc(userDocRef, { id: user.id });
     } catch (err) {
-      console.error(err);
+      console.error("Error adding document: ", err);
     }
   }
 
-  // getUserRef() {
-  //   return collection(this.firestore, 'users');
-  // }
+  getCollectionRef() {
+    return collection(this.firestore, "users");
+  }
 
   getSingleDocRef(colId: string, docId: string) {
     return doc(collection(this.firestore, colId), docId);

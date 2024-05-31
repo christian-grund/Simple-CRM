@@ -2,11 +2,10 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import { ActivatedRoute } from "@angular/router";
 import { FirebaseService } from "../firebase-services/firebase.service";
-import { collection, doc, onSnapshot } from "@angular/fire/firestore";
+import { doc, onSnapshot } from "@angular/fire/firestore";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
-
 import { User } from "../../models/user.class";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogEditAddressComponent } from "../dialog-edit-address/dialog-edit-address.component";
@@ -29,7 +28,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get("id");
     this.userId = id !== null ? id : "DefaultBankName";
-    // console.log('userId:', this.userId);
     this.unsubUser = this.getUser();
   }
 
@@ -38,11 +36,13 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     return onSnapshot(userDocRef, user => {
       if (user.exists()) {
         this.user = new User(user.data());
-        // console.log("user:", this.user);
       } else {
         console.log("No such document!");
       }
     });
+    // return () => {
+    //   console.log("bla");
+    // };
   }
 
   ngOnDestroy(): void {
@@ -54,10 +54,12 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   editUserDetail() {
     const dialog = this.dialog.open(DialogEditUserComponent);
     dialog.componentInstance.user = new User(this.user.toJSON());
+    dialog.componentInstance.userId = this.userId;
   }
 
   editUserAddress() {
     const dialog = this.dialog.open(DialogEditAddressComponent);
     dialog.componentInstance.user = new User(this.user.toJSON());
+    dialog.componentInstance.userId = this.userId;
   }
 }
