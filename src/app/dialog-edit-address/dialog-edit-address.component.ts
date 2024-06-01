@@ -27,6 +27,7 @@ export class DialogEditAddressComponent {
 
   async saveUser() {
     this.loading = true;
+    this.user.id = this.userId;
     const userDocRef = doc(collection(this.firebaseService.firestore, "users"), this.userId);
     const userData = this.user.toJSON();
     await updateDoc(userDocRef, userData);

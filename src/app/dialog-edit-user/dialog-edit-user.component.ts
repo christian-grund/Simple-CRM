@@ -30,8 +30,8 @@ export class DialogEditUserComponent {
   constructor(private firebaseService: FirebaseService, public dialogRef: MatDialogRef<DialogEditUserComponent>) {}
 
   async saveUser() {
-    // this.user.id = this.userId;
     this.loading = true;
+    this.user.id = this.userId;
     const userDocRef = doc(collection(this.firebaseService.firestore, "users"), this.userId);
     const userData = this.user.toJSON();
     await updateDoc(userDocRef, userData);

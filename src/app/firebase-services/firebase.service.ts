@@ -12,8 +12,8 @@ export class FirebaseService {
   async addUserToFirebase(user: User): Promise<void> {
     try {
       const userDocRef = await addDoc(collection(this.firestore, "users"), user.toJSON());
-      user.id = userDocRef.id;
-      await updateDoc(userDocRef, { id: user.id });
+      // user.id = userDocRef.id;
+      // await updateDoc(userDocRef, { id: user.id });
     } catch (err) {
       console.error("Error adding document: ", err);
     }

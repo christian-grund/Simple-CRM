@@ -2,9 +2,14 @@
   <button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="userMenu">
     <mat-icon>more_vert</mat-icon>
   </button>
+
   <mat-menu #userMenu="matMenu">
     <button mat-menu-item (click)="editUserDetail()">Edit</button>
   </mat-menu>
+
+  <button mat-icon-button class="pin-right-down-corner" matTooltip="Delete user" [matTooltipPosition]="position.value!" (click)="deleteUser()" [routerLink]="['/user']" routerLinkActive="router-link-active">
+    <mat-icon>delete</mat-icon>
+  </button>
 
   <img src="./assets/img/profile.png" alt="" />
   <div class="user-details">

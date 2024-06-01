@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterModule } from "@angular/router";
 import { FirebaseService } from "../firebase-services/firebase.service";
-import { doc, onSnapshot } from "@angular/fire/firestore";
+import { deleteDoc, doc, onSnapshot } from "@angular/fire/firestore";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
@@ -10,11 +10,13 @@ import { User } from "../../models/user.class";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogEditAddressComponent } from "../dialog-edit-address/dialog-edit-address.component";
 import { DialogEditUserComponent } from "../dialog-edit-user/dialog-edit-user.component";
+import { MatTooltipModule, TooltipPosition } from "@angular/material/tooltip";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-user-detail",
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule],
+  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule, MatTooltipModule, RouterModule],
   templateUrl: "./user-detail.component.html",
   styleUrl: "./user-detail.component.scss"
 })
@@ -22,6 +24,8 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   userId!: string;
   user: User = new User();
   unsubUser!: () => void;
+  positionOptions: TooltipPosition[] = ["below", "above", "left", "right"];
+  position = new FormControl(this.positionOptions[1]);
 
   constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, public dialog: MatDialog) {}
 
@@ -40,15 +44,17 @@ export class UserDetailComponent implements OnInit, OnDestroy {
         console.log("No such document!");
       }
     });
-    // return () => {
-    //   console.log("bla");
-    // };
   }
 
   ngOnDestroy(): void {
     if (this.unsubUser) {
       this.unsubUser();
     }
+  }
+
+  deleteUser() {
+    const userDocRef = doc(this.firebaseService.firestore, "users", this.userId);
+    deleteDoc(userDocRef);
   }
 
   editUserDetail() {
