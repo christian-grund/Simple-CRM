@@ -22,7 +22,7 @@ import { collection, doc, updateDoc } from "@angular/fire/firestore";
   styleUrl: "./dialog-edit-user.component.scss"
 })
 export class DialogEditUserComponent {
-  user!: User;
+  user: User = new User();
   userId!: string;
   birthDate!: Date;
   loading: boolean = false;

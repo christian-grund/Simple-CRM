@@ -12,11 +12,13 @@ import { DialogEditAddressComponent } from "../dialog-edit-address/dialog-edit-a
 import { DialogEditUserComponent } from "../dialog-edit-user/dialog-edit-user.component";
 import { MatTooltipModule, TooltipPosition } from "@angular/material/tooltip";
 import { FormControl } from "@angular/forms";
+import { provideNativeDateAdapter } from "@angular/material/core";
 
 @Component({
   selector: "app-user-detail",
   standalone: true,
   imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule, MatTooltipModule, RouterModule],
+  providers: [provideNativeDateAdapter()],
   templateUrl: "./user-detail.component.html",
   styleUrl: "./user-detail.component.scss"
 })
