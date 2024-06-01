@@ -23,6 +23,7 @@ import { FormControl } from "@angular/forms";
 export class UserDetailComponent implements OnInit, OnDestroy {
   userId!: string;
   user: User = new User();
+  birthDate!: string;
   unsubUser!: () => void;
   positionOptions: TooltipPosition[] = ["below", "above", "left", "right"];
   position = new FormControl(this.positionOptions[1]);
@@ -40,6 +41,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     return onSnapshot(userDocRef, user => {
       if (user.exists()) {
         this.user = new User(user.data());
+        this.convertBirthdate();
       } else {
         console.log("No such document!");
       }
@@ -52,9 +54,13 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  deleteUser() {
-    const userDocRef = doc(this.firebaseService.firestore, "users", this.userId);
-    deleteDoc(userDocRef);
+  async deleteUser() {
+    await this.firebaseService.deleteUserFromFirebase(this.userId);
+  }
+
+  convertBirthdate() {
+    const date = new Date(this.user.birthDate);
+    this.birthDate = date.toLocaleDateString();
   }
 
   editUserDetail() {

@@ -30,7 +30,7 @@ export class DialogEditAddressComponent {
     this.user.id = this.userId;
     const userDocRef = doc(collection(this.firebaseService.firestore, "users"), this.userId);
     const userData = this.user.toJSON();
-    await updateDoc(userDocRef, userData);
+    await this.firebaseService.updateUserInFirebase(this.userId, this.user);
     this.loading = false;
     this.dialogRef.close();
   }

@@ -36,14 +36,12 @@ export class UserComponent implements OnDestroy {
     return onSnapshot(collection(this.firebaseService.firestore, "users"), changes => {
       this.allUsers = [];
       changes.forEach(doc => {
-        // console.log("user id:", doc.id);
         const userID = doc.id;
         const userData = doc.data();
         const user = new User(userData);
         user.id = userID;
         this.allUsers.push(user);
       });
-      console.log("allUsers:", this.allUsers);
     });
   }
 
