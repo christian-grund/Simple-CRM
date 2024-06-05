@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -12,15 +12,17 @@ import { collection } from "@angular/fire/firestore";
 import { CommonModule } from "@angular/common";
 import { User } from "../../models/user.class";
 import { RouterLink } from "@angular/router";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
 
 @Component({
   selector: "app-user",
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatCardModule, CommonModule, RouterLink],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatCardModule, CommonModule, RouterLink, MatTableModule, MatPaginatorModule],
   templateUrl: "./user.component.html",
   styleUrl: "./user.component.scss"
 })
-export class UserComponent implements OnDestroy {
+export class UserComponent implements OnDestroy, AfterViewInit {
   positionOptions: TooltipPosition[] = ["below", "above", "left", "right"];
   position = new FormControl(this.positionOptions[1]);
 
@@ -28,8 +30,18 @@ export class UserComponent implements OnDestroy {
 
   allUsers: User[] = [];
 
+  displayedColumns: string[] = ["firstName", "lastName", "email", "city"];
+  dataSource = new MatTableDataSource<User>(this.allUsers);
+  clickedRows = new Set<User>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(public dialog: MatDialog, private firebaseService: FirebaseService) {
     this.unsubUsers = this.subUsers();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   subUsers() {
@@ -42,6 +54,7 @@ export class UserComponent implements OnDestroy {
         user.id = userID;
         this.allUsers.push(user);
       });
+      this.dataSource.data = this.allUsers;
     });
   }
 
@@ -55,3 +68,10 @@ export class UserComponent implements OnDestroy {
     this.dialog.open(DialogAddUserComponent);
   }
 }
+
+// export interface User {
+//   name: string;
+//   // position: number;
+//   // weight: number;
+//   // symbol: string;
+// }
