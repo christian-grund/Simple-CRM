@@ -1,0 +1,65 @@
+.add-user-btn {
+  position: absolute;
+  bottom: 56px;
+  right: 56px;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  padding: 16px;
+
+  tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+
+    &:first-child {
+      cursor: unset;
+      &:hover {
+        background-color: unset;
+      }
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    td {
+      height: 48px;
+
+      &:first-child {
+        padding-left: 16px;
+      }
+    }
+
+    th {
+      color: rgba(0, 0, 0, 0.4);
+      font-size: 14px;
+      font-weight: 500;
+      text-align: start;
+      padding: 12px 0;
+
+      &:first-child {
+        padding-left: 16px;
+      }
+    }
+  }
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}

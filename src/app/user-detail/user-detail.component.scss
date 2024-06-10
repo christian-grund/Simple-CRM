@@ -1,7 +1,7 @@
 .user-detail-header {
   min-height: 250px;
   width: 100%;
-  background-color: #ff5b27;
+  background-color: #3f51b5;
   color: white;
   display: flex;
   align-items: flex-end;
@@ -30,9 +30,45 @@
   }
 }
 
-.pin-right-upper-corner {
+.edit-user-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 24px;
+
+  .edit-details {
+    width: 100%;
+
+    mat-card-header {
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    mat-card-content {
+      .user-data {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 0 12px;
+
+        p,
+        #text {
+          margin: 0 0;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+.pin-right-upper-corner-header {
   position: absolute;
   top: 0;
+  right: 0;
+}
+
+.pin-right-upper-corner {
+  position: absolute;
+  top: 6px;
   right: 0;
 }
 

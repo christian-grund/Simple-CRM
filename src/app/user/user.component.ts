@@ -68,10 +68,3 @@ export class UserComponent implements OnDestroy, AfterViewInit {
     this.dialog.open(DialogAddUserComponent);
   }
 }
-
-// export interface User {
-//   name: string;
-//   // position: number;
-//   // weight: number;
-//   // symbol: string;
-// }

@@ -1,38 +1,87 @@
 <mat-card class="user-detail-header">
-  <button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="userMenu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-
-  <mat-menu #userMenu="matMenu">
-    <button mat-menu-item (click)="editUserDetail()">Edit</button>
-  </mat-menu>
-
-  <button mat-icon-button class="pin-right-down-corner" matTooltip="Delete user" [matTooltipPosition]="position.value!" (click)="deleteUser()" [routerLink]="['/user']" routerLinkActive="router-link-active">
+  <button mat-icon-button class="pin-right-upper-corner-header" matTooltip="Delete {{ user.firstName }} {{ user.lastName }}" [matTooltipPosition]="positionOptions[3]" (click)="deleteUser()" [routerLink]="['/user']" routerLinkActive="router-link-active">
     <mat-icon>delete</mat-icon>
   </button>
 
   <img src="./assets/img/profile.png" alt="" />
   <div class="user-details">
     <h2>{{ user.firstName }} {{ user.lastName }}</h2>
-    {{ user.email }}<br />
-    {{ birthDate }}
+    <button mat-icon-button matTooltip="Send Mail to {{ user.firstName }}" [matTooltipPosition]="positionOptions[0]">
+      <mat-icon>mail</mat-icon>
+    </button>
   </div>
 </mat-card>
 
+<div class="edit-user-wrapper">
+  <mat-card class="edit-details mt-32">
+    <mat-card-header>
+      <mat-card-title>User</mat-card-title>
+    </mat-card-header>
+
+    <button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="userMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="editUserDetail()">Edit</button>
+    </mat-menu>
+
+    <mat-card-content>
+      <div class="user-data">
+        <p>First Name:</p>
+        <p>{{ user.firstName }}</p>
+      </div>
+      <div class="user-data">
+        <p>Last Name:</p>
+        <p>{{ user.lastName }}</p>
+      </div>
+      <div class="user-data">
+        <p>Birthdate:</p>
+        <p>{{ birthDate }}</p>
+      </div>
+      <div class="user-data">
+        <p>Mail:</p>
+        <p>{{ user.email }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="edit-details mt-32">
+    <mat-card-header>
+      <mat-card-title>Address</mat-card-title>
+    </mat-card-header>
+
+    <button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="addressMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #addressMenu="matMenu">
+      <button mat-menu-item (click)="editUserAddress()">Edit</button>
+    </mat-menu>
+
+    <mat-card-content>
+      <div class="user-data">
+        <p>Street:</p>
+        <p>{{ user.street }}</p>
+      </div>
+      <div class="user-data">
+        <p>ZIP code:</p>
+        <p>{{ user.zipCode }}</p>
+      </div>
+      <div class="user-data">
+        <p>City:</p>
+        <p>{{ user.city }}</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
 <mat-card class="mt-32">
   <mat-card-header>
-    <mat-card-title>Address</mat-card-title>
+    <mat-card-title>Order history</mat-card-title>
   </mat-card-header>
 
-  <button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="addressMenu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #addressMenu="matMenu">
-    <button mat-menu-item (click)="editUserAddress()">Edit</button>
-  </mat-menu>
-
-  <mat-card-content>
-    {{ user.street }} <br />
-    {{ user.zipCode }} {{ user.city }}
-  </mat-card-content>
+  <mat-card-content> </mat-card-content>
 </mat-card>
+
+<button class="add-user-btn" mat-fab color="primary" matTooltip="Add user" [matTooltipPosition]="position.value!" (click)="openNewOrderDialog()">
+  <mat-icon>add</mat-icon>
+</button>

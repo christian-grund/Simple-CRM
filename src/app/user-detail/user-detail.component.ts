@@ -76,4 +76,8 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     dialog.componentInstance.user = new User(this.user.toJSON());
     dialog.componentInstance.userId = this.userId;
   }
+
+  openNewOrderDialog() {
+    // this.dialog.open();
+  }
 }
