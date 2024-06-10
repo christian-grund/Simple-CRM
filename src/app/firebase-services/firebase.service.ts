@@ -1,14 +1,45 @@
 import { Injectable, inject } from "@angular/core";
-import { Firestore, deleteDoc, doc, updateDoc } from "@angular/fire/firestore";
+import { Firestore, deleteDoc, doc, onSnapshot, updateDoc } from "@angular/fire/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { User } from "../../models/user.class";
 import { Product } from "../../models/product.class";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Injectable({
   providedIn: "root"
 })
 export class FirebaseService {
   firestore: Firestore = inject(Firestore);
+
+  // public users: User[] = [];
+  unsubUsers;
+  allUsers: User[] = [];
+  dataSource = new MatTableDataSource<User>(this.allUsers);
+
+  constructor() {
+    this.unsubUsers = this.subUsers();
+  }
+
+  subUsers() {
+    return onSnapshot(collection(this.firestore, "users"), changes => {
+      this.allUsers = [];
+      changes.forEach(doc => {
+        const userID = doc.id;
+        const userData = doc.data();
+        const user = new User(userData);
+        user.id = userID;
+        this.allUsers.push(user);
+      });
+      console.log("allUsers:", this.allUsers);
+      this.dataSource.data = this.allUsers;
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.unsubUsers) {
+      this.unsubUsers();
+    }
+  }
 
   async addUserToFirebase(user: User): Promise<void> {
     await addDoc(this.getCollectionRef("users"), user.toJSON()).catch(err => {

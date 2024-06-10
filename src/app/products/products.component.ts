@@ -8,6 +8,9 @@ import { MatTableModule } from "@angular/material/table";
 import { MatTooltipModule, TooltipPosition } from "@angular/material/tooltip";
 import { RouterLink } from "@angular/router";
 import { DialogAddProductComponent } from "../dialog-add-product/dialog-add-product.component";
+import { Product } from "../../models/product.class";
+import { FirebaseService } from "../firebase-services/firebase.service";
+import { onSnapshot } from "@angular/fire/firestore";
 
 @Component({
   selector: "app-products",
@@ -18,8 +21,32 @@ import { DialogAddProductComponent } from "../dialog-add-product/dialog-add-prod
 })
 export class ProductsComponent {
   positionOptions: TooltipPosition[] = ["below", "above", "left", "right"];
+  unsubProducts!: any;
+  allProducts: Product[] = [];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private firebaseService: FirebaseService) {
+    // this.unsubProducts = this.unsubProducts();
+  }
+
+  // subUsers() {
+  //   return onSnapshot(collection(this.firebaseService.firestore, "users"), changes => {
+  //     this.allUsers = [];
+  //     changes.forEach(doc => {
+  //       const userID = doc.id;
+  //       const userData = doc.data();
+  //       const user = new User(userData);
+  //       user.id = userID;
+  //       this.allUsers.push(user);
+  //     });
+  //     this.dataSource.data = this.allUsers;
+  //   });
+  // }
+
+  // ngOnDestroy(): void {
+  //   if (this.unsubProducts) {
+  //     this.unsubProducts();
+  //   }
+  // }
 
   openAddProductDialog() {
     this.dialog.open(DialogAddProductComponent);
