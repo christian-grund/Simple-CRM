@@ -26,9 +26,6 @@ export class UserComponent implements AfterViewInit {
   positionOptions: TooltipPosition[] = ["below", "above", "left", "right"];
   position = new FormControl(this.positionOptions[1]);
 
-  // unsubUsers!: any;
-
-  // allUsers: User[] = [];
   user = this.firebaseService.allUsers;
 
   displayedColumns: string[] = ["firstName", "lastName", "email", "city"];
@@ -38,34 +35,11 @@ export class UserComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(public dialog: MatDialog, public firebaseService: FirebaseService) {
-    // this.unsubUsers = this.subUsers();
-  }
+  constructor(public dialog: MatDialog, public firebaseService: FirebaseService) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    console.log("user:", this.user);
   }
-
-  // subUsers() {
-  //   return onSnapshot(collection(this.firebaseService.firestore, "users"), changes => {
-  //     this.allUsers = [];
-  //     changes.forEach(doc => {
-  //       const userID = doc.id;
-  //       const userData = doc.data();
-  //       const user = new User(userData);
-  //       user.id = userID;
-  //       this.allUsers.push(user);
-  //     });
-  //     this.dataSource.data = this.allUsers;
-  //   });
-  // }
-
-  // ngOnDestroy(): void {
-  //   if (this.unsubUsers) {
-  //     this.unsubUsers();
-  //   }
-  // }
 
   openDialog() {
     this.dialog.open(DialogAddUserComponent);

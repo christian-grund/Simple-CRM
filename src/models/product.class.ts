@@ -19,6 +19,4 @@ export class Product {
       type: this.type
     };
   }
-
-  //   new User(); -> hier könnte ein neuer User angelegt werden, ohne dass das Object benötigt wird
 }

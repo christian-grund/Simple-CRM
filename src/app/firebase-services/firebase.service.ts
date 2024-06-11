@@ -10,14 +10,15 @@ import { MatTableDataSource } from "@angular/material/table";
 })
 export class FirebaseService {
   firestore: Firestore = inject(Firestore);
-
-  // public users: User[] = [];
-  unsubUsers;
   allUsers: User[] = [];
+  allProducts: Product[] = [];
   dataSource = new MatTableDataSource<User>(this.allUsers);
+  unsubUsers;
+  unsubProducts;
 
   constructor() {
     this.unsubUsers = this.subUsers();
+    this.unsubProducts = this.subProducts();
   }
 
   subUsers() {
@@ -30,14 +31,30 @@ export class FirebaseService {
         user.id = userID;
         this.allUsers.push(user);
       });
-      console.log("allUsers:", this.allUsers);
       this.dataSource.data = this.allUsers;
+    });
+  }
+
+  subProducts() {
+    return onSnapshot(this.getCollectionRef("products"), changes => {
+      this.allProducts = [];
+      changes.forEach(doc => {
+        const productData = doc.data();
+        const product = new Product(productData);
+        this.allProducts.push(product);
+        // console.log("doc:", doc.data());
+      });
+      console.log("allProducts:", this.allProducts);
+      // this.dataSource.data = this.allProducts;
     });
   }
 
   ngOnDestroy(): void {
     if (this.unsubUsers) {
       this.unsubUsers();
+    }
+    if (this.unsubProducts) {
+      this.unsubProducts();
     }
   }
 

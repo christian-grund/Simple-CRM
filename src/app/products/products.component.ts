@@ -21,32 +21,9 @@ import { onSnapshot } from "@angular/fire/firestore";
 })
 export class ProductsComponent {
   positionOptions: TooltipPosition[] = ["below", "above", "left", "right"];
-  unsubProducts!: any;
-  allProducts: Product[] = [];
+  product = this.firebaseService.allProducts;
 
-  constructor(public dialog: MatDialog, private firebaseService: FirebaseService) {
-    // this.unsubProducts = this.unsubProducts();
-  }
-
-  // subUsers() {
-  //   return onSnapshot(collection(this.firebaseService.firestore, "users"), changes => {
-  //     this.allUsers = [];
-  //     changes.forEach(doc => {
-  //       const userID = doc.id;
-  //       const userData = doc.data();
-  //       const user = new User(userData);
-  //       user.id = userID;
-  //       this.allUsers.push(user);
-  //     });
-  //     this.dataSource.data = this.allUsers;
-  //   });
-  // }
-
-  // ngOnDestroy(): void {
-  //   if (this.unsubProducts) {
-  //     this.unsubProducts();
-  //   }
-  // }
+  constructor(public dialog: MatDialog, private firebaseService: FirebaseService) {}
 
   openAddProductDialog() {
     this.dialog.open(DialogAddProductComponent);
