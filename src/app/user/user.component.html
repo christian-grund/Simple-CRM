@@ -1,21 +1,3 @@
-<!-- ngSkipHydration -->
-<!-- <mat-card> -->
-<!-- <mat-card-content>Simple card</mat-card-content> -->
-<!-- <table class="user-table">
-    <tr>
-      <th>Name</th>
-      <th>E-Mail</th>
-      <th>City</th>
-    </tr>
-
-    <tr *ngFor="let user of allUsers" [routerLink]="['/user', user.id]">
-      <td>{{ user.firstName }} {{ user.lastName }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.city }}</td>
-    </tr>
-  </table>
-</mat-card> -->
-
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="firstName">
@@ -48,3 +30,21 @@
 <button class="add-user-btn" mat-fab color="primary" matTooltip="Add user" [matTooltipPosition]="position.value!" (click)="openDialog()">
   <mat-icon>add</mat-icon>
 </button>
+
+<!-- ngSkipHydration -->
+<!-- <mat-card> -->
+<!-- <mat-card-content>Simple card</mat-card-content> -->
+<!-- <table class="user-table">
+    <tr>
+      <th>Name</th>
+      <th>E-Mail</th>
+      <th>City</th>
+    </tr>
+
+    <tr *ngFor="let user of allUsers" [routerLink]="['/user', user.id]">
+      <td>{{ user.firstName }} {{ user.lastName }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.city }}</td>
+    </tr>
+  </table>
+</mat-card> -->

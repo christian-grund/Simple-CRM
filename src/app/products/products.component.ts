@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatDialog } from "@angular/material/dialog";
@@ -10,7 +10,7 @@ import { RouterLink } from "@angular/router";
 import { DialogAddProductComponent } from "../dialog-add-product/dialog-add-product.component";
 import { Product } from "../../models/product.class";
 import { FirebaseService } from "../firebase-services/firebase.service";
-import { onSnapshot } from "@angular/fire/firestore";
+import { MatPaginator } from "@angular/material/paginator";
 
 @Component({
   selector: "app-products",
@@ -21,11 +21,30 @@ import { onSnapshot } from "@angular/fire/firestore";
 })
 export class ProductsComponent {
   positionOptions: TooltipPosition[] = ["below", "above", "left", "right"];
-  product = this.firebaseService.allProducts;
+  public product;
 
-  constructor(public dialog: MatDialog, private firebaseService: FirebaseService) {}
+  dataSourceProducts = this.firebaseService.dataSourceProducts;
+
+  displayedColumns: string[] = ["Product Name", "Price per Unit", "Type", "Edit", "Delete"];
+  clickedRows = new Set<Product>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(public dialog: MatDialog, public firebaseService: FirebaseService) {
+    this.product = this.firebaseService.allProducts;
+    console.log("product:", this.product);
+  }
+
+  deleteProduct(product: Product) {
+    // console.log("deleteProduct:", product);
+    this.firebaseService.deleteProductFromFirebase(product.id);
+  }
 
   openAddProductDialog() {
     this.dialog.open(DialogAddProductComponent);
+  }
+
+  openEditProductDialog() {
+    // this.dialog.open(DialogAddProductComponent);
   }
 }

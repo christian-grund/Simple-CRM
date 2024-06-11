@@ -13,6 +13,7 @@ export class FirebaseService {
   allUsers: User[] = [];
   allProducts: Product[] = [];
   dataSource = new MatTableDataSource<User>(this.allUsers);
+  dataSourceProducts = new MatTableDataSource<Product>(this.allProducts);
   unsubUsers;
   unsubProducts;
 
@@ -40,12 +41,12 @@ export class FirebaseService {
       this.allProducts = [];
       changes.forEach(doc => {
         const productData = doc.data();
+        productData["id"] = doc.id;
         const product = new Product(productData);
         this.allProducts.push(product);
-        // console.log("doc:", doc.data());
       });
-      console.log("allProducts:", this.allProducts);
-      // this.dataSource.data = this.allProducts;
+      // console.log("allProducts:", this.allProducts);
+      this.dataSourceProducts.data = this.allProducts;
     });
   }
 
