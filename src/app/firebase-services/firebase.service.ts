@@ -45,7 +45,7 @@ export class FirebaseService {
         const product = new Product(productData);
         this.allProducts.push(product);
       });
-      // console.log("allProducts:", this.allProducts);
+      console.log("allProducts:", this.allProducts);
       this.dataSourceProducts.data = this.allProducts;
     });
   }
@@ -84,8 +84,8 @@ export class FirebaseService {
     console.log("addProductToFirebase:", product.toJSON());
   }
 
-  async updateProductInFirebase(docId: string, user: User) {
-    await updateDoc(this.getSingleDocRef("products", docId), user.toJSON()).catch(err => {
+  async updateProductInFirebase(docId: string, product: Product) {
+    await updateDoc(this.getSingleDocRef("products", docId), product.toJSON()).catch(err => {
       console.error(err);
     });
   }

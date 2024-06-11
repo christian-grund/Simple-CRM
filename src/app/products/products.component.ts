@@ -11,6 +11,7 @@ import { DialogAddProductComponent } from "../dialog-add-product/dialog-add-prod
 import { Product } from "../../models/product.class";
 import { FirebaseService } from "../firebase-services/firebase.service";
 import { MatPaginator } from "@angular/material/paginator";
+import { DialogEditProductComponent } from "../dialog-edit-product/dialog-edit-product.component";
 
 @Component({
   selector: "app-products",
@@ -32,11 +33,9 @@ export class ProductsComponent {
 
   constructor(public dialog: MatDialog, public firebaseService: FirebaseService) {
     this.product = this.firebaseService.allProducts;
-    console.log("product:", this.product);
   }
 
   deleteProduct(product: Product) {
-    // console.log("deleteProduct:", product);
     this.firebaseService.deleteProductFromFirebase(product.id);
   }
 
@@ -44,7 +43,8 @@ export class ProductsComponent {
     this.dialog.open(DialogAddProductComponent);
   }
 
-  openEditProductDialog() {
-    // this.dialog.open(DialogAddProductComponent);
+  openEditProductDialog(product: Product) {
+    const dialog = this.dialog.open(DialogEditProductComponent);
+    dialog.componentInstance.product = product;
   }
 }

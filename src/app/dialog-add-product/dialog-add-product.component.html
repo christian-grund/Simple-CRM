@@ -19,8 +19,6 @@
     <div>
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Type</mat-label>
-        <!-- <input matInput [(ngModel)]="product.type" ngDefaultControl [disabled]="loading" /> -->
-        <!-- <mat-select [(value)]="selected"> -->
         <mat-select [(ngModel)]="product.type" [disabled]="loading">
           <mat-option value="Product">Product</mat-option>
           <mat-option value="Service">Service</mat-option>
