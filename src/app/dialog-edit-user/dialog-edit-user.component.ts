@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { User } from "../../models/user.class";
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
@@ -21,7 +21,7 @@ import { collection, doc, updateDoc } from "@angular/fire/firestore";
   templateUrl: "./dialog-edit-user.component.html",
   styleUrl: "./dialog-edit-user.component.scss"
 })
-export class DialogEditUserComponent {
+export class DialogEditUserComponent implements OnInit {
   user: User = new User();
   userId!: string;
   birthDate!: Date;
@@ -29,12 +29,15 @@ export class DialogEditUserComponent {
 
   constructor(private firebaseService: FirebaseService, public dialogRef: MatDialogRef<DialogEditUserComponent>) {}
 
+  ngOnInit(): void {
+    this.birthDate = new Date(this.user.birthDate);
+  }
+
   async saveUser() {
     this.loading = true;
+    this.user.birthDate = this.birthDate.getTime(); // wandelt Datum in Timestamp um
     this.user.id = this.userId;
-    const userDocRef = doc(collection(this.firebaseService.firestore, "users"), this.userId);
-    const userData = this.user.toJSON();
-    await updateDoc(userDocRef, userData);
+    await this.firebaseService.updateUserInFirebase(this.userId, this.user);
     this.loading = false;
     this.dialogRef.close();
   }
