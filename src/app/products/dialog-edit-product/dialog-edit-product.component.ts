@@ -9,8 +9,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatSelectModule } from "@angular/material/select";
-import { Product } from "../../models/product.class";
-import { FirebaseService } from "../firebase-services/firebase.service";
+import { Product } from "../../../models/product.class";
+import { FirebaseService } from "../../services/firebase-services/firebase.service";
 
 @Component({
   selector: "app-dialog-edit-product",

@@ -7,11 +7,11 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
 import { MatTooltipModule, TooltipPosition } from "@angular/material/tooltip";
 import { RouterLink } from "@angular/router";
-import { DialogAddProductComponent } from "../dialog-add-product/dialog-add-product.component";
+import { DialogAddProductComponent } from "./dialog-add-product/dialog-add-product.component";
 import { Product } from "../../models/product.class";
-import { FirebaseService } from "../firebase-services/firebase.service";
+import { FirebaseService } from "../services/firebase-services/firebase.service";
 import { MatPaginator } from "@angular/material/paginator";
-import { DialogEditProductComponent } from "../dialog-edit-product/dialog-edit-product.component";
+import { DialogEditProductComponent } from "./dialog-edit-product/dialog-edit-product.component";
 
 @Component({
   selector: "app-products",

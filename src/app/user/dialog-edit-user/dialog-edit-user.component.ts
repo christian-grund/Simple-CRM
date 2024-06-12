@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { User } from "../../models/user.class";
+import { User } from "../../../models/user.class";
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
@@ -8,10 +8,9 @@ import { MatIconModule } from "@angular/material/icon";
 import { FormsModule } from "@angular/forms";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { CommonModule } from "@angular/common";
-import { FirebaseService } from "../firebase-services/firebase.service";
+import { FirebaseService } from "../../services/firebase-services/firebase.service";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MAT_DATE_LOCALE, provideNativeDateAdapter } from "@angular/material/core";
-import { collection, doc, updateDoc } from "@angular/fire/firestore";
 import { MatSelectModule } from "@angular/material/select";
 
 @Component({

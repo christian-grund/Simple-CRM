@@ -1,8 +1,8 @@
 import { Injectable, inject } from "@angular/core";
 import { Firestore, deleteDoc, doc, onSnapshot, updateDoc } from "@angular/fire/firestore";
 import { collection, addDoc } from "firebase/firestore";
-import { User } from "../../models/user.class";
-import { Product } from "../../models/product.class";
+import { User } from "../../../models/user.class";
+import { Product } from "../../../models/product.class";
 import { MatTableDataSource } from "@angular/material/table";
 
 @Injectable({

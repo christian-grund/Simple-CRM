@@ -8,7 +8,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { provideNativeDateAdapter } from "@angular/material/core";
 import { Product } from "../../models/product.class";
 import { FormsModule } from "@angular/forms";
-import { FirebaseService } from "../firebase-services/firebase.service";
+import { FirebaseService } from "../services/firebase-services/firebase.service";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { CommonModule } from "@angular/common";
 import { MatSelectModule } from "@angular/material/select";

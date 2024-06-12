@@ -4,15 +4,13 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule, TooltipPosition } from "@angular/material/tooltip";
 import { MatDialog, MatDialogModule } from "@angular/material/dialog";
-import { DialogAddUserComponent } from "../dialog-add-user/dialog-add-user.component";
+import { DialogAddUserComponent } from "./dialog-add-user/dialog-add-user.component";
 import { MatCardModule } from "@angular/material/card";
-import { FirebaseService } from "../firebase-services/firebase.service";
-import { onSnapshot } from "firebase/firestore";
-import { collection } from "@angular/fire/firestore";
+import { FirebaseService } from "../services/firebase-services/firebase.service";
 import { CommonModule } from "@angular/common";
 import { User } from "../../models/user.class";
 import { RouterLink } from "@angular/router";
-import { MatTableDataSource, MatTableModule } from "@angular/material/table";
+import { MatTableModule } from "@angular/material/table";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
 
 @Component({

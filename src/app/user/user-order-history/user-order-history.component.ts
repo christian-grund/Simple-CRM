@@ -5,9 +5,9 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatTooltipModule, TooltipPosition } from "@angular/material/tooltip";
-import { FirebaseService } from "../firebase-services/firebase.service";
+import { FirebaseService } from "../../services/firebase-services/firebase.service";
 import { MatDialog } from "@angular/material/dialog";
-import { DialogAddOrderComponent } from "../dialog-add-order/dialog-add-order.component";
+import { DialogAddOrderComponent } from "../../dialog-add-order/dialog-add-order.component";
 
 @Component({
   selector: "app-user-order-history",

@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatCardModule } from "@angular/material/card";
 import { ActivatedRoute, RouterModule } from "@angular/router";
-import { FirebaseService } from "../firebase-services/firebase.service";
+import { FirebaseService } from "../../services/firebase-services/firebase.service";
 import { deleteDoc, doc, onSnapshot } from "@angular/fire/firestore";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
-import { User } from "../../models/user.class";
+import { User } from "../../../models/user.class";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogEditAddressComponent } from "../dialog-edit-address/dialog-edit-address.component";
 import { DialogEditUserComponent } from "../dialog-edit-user/dialog-edit-user.component";
@@ -14,7 +14,7 @@ import { MatTooltipModule, TooltipPosition } from "@angular/material/tooltip";
 import { FormControl } from "@angular/forms";
 import { provideNativeDateAdapter } from "@angular/material/core";
 import { UserOrderHistoryComponent } from "../user-order-history/user-order-history.component";
-import { DialogAddOrderComponent } from "../dialog-add-order/dialog-add-order.component";
+import { DialogAddOrderComponent } from "../../dialog-add-order/dialog-add-order.component";
 import { CommonModule } from "@angular/common";
 
 @Component({

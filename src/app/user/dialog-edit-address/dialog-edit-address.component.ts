@@ -7,8 +7,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
-import { User } from "../../models/user.class";
-import { FirebaseService } from "../firebase-services/firebase.service";
+import { User } from "../../../models/user.class";
+import { FirebaseService } from "../../services/firebase-services/firebase.service";
 import { Firestore, collection, doc, updateDoc } from "@angular/fire/firestore";
 
 @Component({
