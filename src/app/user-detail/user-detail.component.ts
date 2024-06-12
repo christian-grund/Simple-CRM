@@ -13,11 +13,14 @@ import { DialogEditUserComponent } from "../dialog-edit-user/dialog-edit-user.co
 import { MatTooltipModule, TooltipPosition } from "@angular/material/tooltip";
 import { FormControl } from "@angular/forms";
 import { provideNativeDateAdapter } from "@angular/material/core";
+import { UserOrderHistoryComponent } from "../user-order-history/user-order-history.component";
+import { DialogAddOrderComponent } from "../dialog-add-order/dialog-add-order.component";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: "app-user-detail",
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule, MatTooltipModule, RouterModule],
+  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule, MatTooltipModule, RouterModule, UserOrderHistoryComponent, CommonModule],
   providers: [provideNativeDateAdapter()],
   templateUrl: "./user-detail.component.html",
   styleUrl: "./user-detail.component.scss"
@@ -78,6 +81,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   openNewOrderDialog() {
-    // this.dialog.open();
+    this.dialog.open(DialogAddOrderComponent);
   }
 }

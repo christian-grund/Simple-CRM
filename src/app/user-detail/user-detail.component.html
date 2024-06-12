@@ -2,8 +2,8 @@
   <button mat-icon-button class="pin-right-upper-corner-header" matTooltip="Delete {{ user.firstName }} {{ user.lastName }}" [matTooltipPosition]="positionOptions[3]" (click)="deleteUser()" [routerLink]="['/user']" routerLinkActive="router-link-active">
     <mat-icon>delete</mat-icon>
   </button>
-
-  <img src="./assets/img/profile.png" alt="" />
+  <img *ngIf="user.salutation === 'Mr.'" src="./assets/img/profile.png" alt="Mr. Image" />
+  <img *ngIf="user.salutation === 'Ms.'" src="./assets/img/woman.png" alt="Ms. Image" />
   <div class="user-details">
     <h2>{{ user.firstName }} {{ user.lastName }}</h2>
     <button mat-icon-button matTooltip="Send Mail to {{ user.firstName }}" [matTooltipPosition]="positionOptions[0]">
@@ -26,6 +26,10 @@
     </mat-menu>
 
     <mat-card-content>
+      <div class="user-data">
+        <p>Salutation:</p>
+        <p>{{ user.salutation }}</p>
+      </div>
       <div class="user-data">
         <p>First Name:</p>
         <p>{{ user.firstName }}</p>
@@ -74,10 +78,36 @@
   </mat-card>
 </div>
 
+<!-- <app-user-order-history> </app-user-order-history> -->
+
 <mat-card class="mt-32">
   <mat-card-header>
     <mat-card-title>Order history</mat-card-title>
   </mat-card-header>
 
-  <mat-card-content> </mat-card-content>
+  <mat-card-content>
+    <table>
+      <tr>
+        <th>Order Date</th>
+        <th>Total Items</th>
+        <th>Total Value</th>
+        <th>Order Status</th>
+      </tr>
+      <tr>
+        <td>01.01.2024</td>
+        <td>4</td>
+        <td>100 €</td>
+        <td>Delivered</td>
+      </tr>
+      <!-- <tr *ngFor="let user of allUsers">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.city }}</td>
+      </tr> -->
+    </table>
+  </mat-card-content>
 </mat-card>
+
+<button class="add-order-btn" mat-fab color="primary" matTooltip="Add order" [matTooltipPosition]="positionOptions[1]" (click)="openNewOrderDialog()">
+  <mat-icon>add</mat-icon>
+</button>

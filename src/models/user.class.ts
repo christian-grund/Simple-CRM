@@ -1,6 +1,7 @@
 // import { FormsModule } from '@angular/forms';
 
 export class User {
+  public salutation: string;
   public firstName: string;
   public lastName: string;
   public email: string;
@@ -12,18 +13,20 @@ export class User {
 
   // ?: Object kann optional angelegt werden
   constructor(obj?: any) {
-    this.firstName = obj ? obj.firstName : ''; // wenn object existiert, kommt obj.firstName rein, ansonsten '';
-    this.lastName = obj ? obj.lastName : '';
-    this.email = obj ? obj.email : '';
-    this.birthDate = obj ? obj.birthDate : '';
-    this.street = obj ? obj.street : '';
-    this.zipCode = obj ? obj.zipCode : '';
-    this.city = obj ? obj.city : '';
-    this.id = obj ? obj.id : '';
+    this.salutation = obj ? obj.salutation : ""; // wenn object existiert, kommt obj.firstName rein, ansonsten '';
+    this.firstName = obj ? obj.firstName : "";
+    this.lastName = obj ? obj.lastName : "";
+    this.email = obj ? obj.email : "";
+    this.birthDate = obj ? obj.birthDate : "";
+    this.street = obj ? obj.street : "";
+    this.zipCode = obj ? obj.zipCode : "";
+    this.city = obj ? obj.city : "";
+    this.id = obj ? obj.id : "";
   }
 
   public toJSON() {
     return {
+      salutation: this.salutation,
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
@@ -31,7 +34,7 @@ export class User {
       street: this.street,
       zipCode: this.zipCode,
       city: this.city,
-      id: this.id,
+      id: this.id
     };
   }
 

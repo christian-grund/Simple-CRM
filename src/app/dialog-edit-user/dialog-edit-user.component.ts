@@ -10,14 +10,15 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { CommonModule } from "@angular/common";
 import { FirebaseService } from "../firebase-services/firebase.service";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import { provideNativeDateAdapter } from "@angular/material/core";
+import { MAT_DATE_LOCALE, provideNativeDateAdapter } from "@angular/material/core";
 import { collection, doc, updateDoc } from "@angular/fire/firestore";
+import { MatSelectModule } from "@angular/material/select";
 
 @Component({
   selector: "app-dialog-edit-user",
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatIconModule, FormsModule, MatProgressBarModule, MatDatepickerModule, CommonModule],
-  providers: [provideNativeDateAdapter()],
+  imports: [MatDialogModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatIconModule, FormsModule, MatProgressBarModule, MatDatepickerModule, MatSelectModule, CommonModule],
+  providers: [provideNativeDateAdapter(), { provide: MAT_DATE_LOCALE, useValue: "en-GB" }],
   templateUrl: "./dialog-edit-user.component.html",
   styleUrl: "./dialog-edit-user.component.scss"
 })
