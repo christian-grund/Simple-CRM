@@ -1,3 +1,12 @@
+<mat-card class="search">
+  <mat-card-content>
+    <div class="search-container">
+      <p>Search Product Table</p>
+      <input matInput class="stylish-input" placeholder="Search..." (keyup)="applyFilter($event)" />
+    </div>
+  </mat-card-content>
+</mat-card>
+
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="name">
@@ -41,5 +50,3 @@
 <button class="add-product-btn" mat-fab color="primary" matTooltip="Add Product" [matTooltipPosition]="positionOptions[0]" (click)="openAddProductDialog()">
   <mat-icon>add</mat-icon>
 </button>
-
-<input matInput placeholder="Search..." (keyup)="applyFilter($event)" />

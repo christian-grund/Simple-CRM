@@ -13,11 +13,12 @@ import { RouterLink } from "@angular/router";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
 import { MatSort, MatSortModule, Sort } from "@angular/material/sort";
+import { MatInputModule } from "@angular/material/input";
 
 @Component({
   selector: "app-user",
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatCardModule, CommonModule, RouterLink, MatTableModule, MatSortModule, MatPaginatorModule],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatCardModule, CommonModule, RouterLink, MatTableModule, MatSortModule, MatPaginatorModule, MatInputModule],
   templateUrl: "./user.component.html",
   styleUrl: "./user.component.scss"
 })

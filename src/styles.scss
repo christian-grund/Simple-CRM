@@ -38,3 +38,18 @@ body {
 .pt-4 {
   padding-top: 4px;
 }
+
+.stylish-input {
+  font-size: 14px;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.stylish-input:focus {
+  outline: none;
+  // border-color: dodgerblue;
+  // box-shadow: 0 0 8px rgba(30, 144, 255, 0.8);
+}
