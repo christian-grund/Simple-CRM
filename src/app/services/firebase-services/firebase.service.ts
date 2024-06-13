@@ -42,10 +42,11 @@ export class FirebaseService {
       changes.forEach(doc => {
         const productData = doc.data();
         productData["id"] = doc.id;
+        productData["price"] = Number(productData["price"]);
         const product = new Product(productData);
         this.allProducts.push(product);
       });
-      // console.log("allProducts:", this.allProducts);
+      console.log("allProducts:", this.allProducts);
       this.dataSourceProducts.data = this.allProducts;
     });
   }

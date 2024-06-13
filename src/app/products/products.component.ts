@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatDialog } from "@angular/material/dialog";
@@ -10,29 +10,36 @@ import { RouterLink } from "@angular/router";
 import { DialogAddProductComponent } from "./dialog-add-product/dialog-add-product.component";
 import { Product } from "../../models/product.class";
 import { FirebaseService } from "../services/firebase-services/firebase.service";
-import { MatPaginator } from "@angular/material/paginator";
+import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
 import { DialogEditProductComponent } from "./dialog-edit-product/dialog-edit-product.component";
+import { MatSort, MatSortModule } from "@angular/material/sort";
 
 @Component({
   selector: "app-products",
   standalone: true,
-  imports: [MatTableModule, MatCardModule, MatIconModule, MatTooltipModule, MatButtonModule, CommonModule, RouterLink],
+  imports: [MatTableModule, MatSortModule, MatCardModule, MatIconModule, MatTooltipModule, MatButtonModule, CommonModule, RouterLink, MatPaginatorModule],
   templateUrl: "./products.component.html",
-  styleUrl: "./products.component.scss"
+  styleUrls: ["./products.component.scss"]
 })
-export class ProductsComponent {
+export class ProductsComponent implements AfterViewInit {
   positionOptions: TooltipPosition[] = ["below", "above", "left", "right"];
   public product;
 
-  dataSourceProducts = this.firebaseService.dataSourceProducts;
-
-  displayedColumns: string[] = ["Product Name", "Price per Unit", "Type", "Edit", "Delete"];
+  displayedColumns: string[] = ["name", "price", "type", "edit", "delete"];
+  dataSource = this.firebaseService.dataSourceProducts;
   clickedRows = new Set<Product>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public dialog: MatDialog, public firebaseService: FirebaseService) {
     this.product = this.firebaseService.allProducts;
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    console.log("Paginator and Sort set", this.dataSource);
   }
 
   deleteProduct(product: Product) {

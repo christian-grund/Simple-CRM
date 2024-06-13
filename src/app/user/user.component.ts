@@ -12,11 +12,12 @@ import { User } from "../../models/user.class";
 import { RouterLink } from "@angular/router";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
+import { MatSort, MatSortModule } from "@angular/material/sort";
 
 @Component({
   selector: "app-user",
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatCardModule, CommonModule, RouterLink, MatTableModule, MatPaginatorModule],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatCardModule, CommonModule, RouterLink, MatTableModule, MatSortModule, MatPaginatorModule],
   templateUrl: "./user.component.html",
   styleUrl: "./user.component.scss"
 })
@@ -27,16 +28,17 @@ export class UserComponent implements AfterViewInit {
   user = this.firebaseService.allUsers;
 
   displayedColumns: string[] = ["firstName", "lastName", "email", "city"];
-  // dataSource = new MatTableDataSource<User>(this.allUsers);
   dataSource = this.firebaseService.dataSource;
   clickedRows = new Set<User>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public dialog: MatDialog, public firebaseService: FirebaseService) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   openDialog() {
