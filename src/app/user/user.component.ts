@@ -10,9 +10,9 @@ import { FirebaseService } from "../services/firebase-services/firebase.service"
 import { CommonModule } from "@angular/common";
 import { User } from "../../models/user.class";
 import { RouterLink } from "@angular/router";
-import { MatTableModule } from "@angular/material/table";
+import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
-import { MatSort, MatSortModule } from "@angular/material/sort";
+import { MatSort, MatSortModule, Sort } from "@angular/material/sort";
 
 @Component({
   selector: "app-user",
@@ -29,6 +29,7 @@ export class UserComponent implements AfterViewInit {
 
   displayedColumns: string[] = ["firstName", "lastName", "email", "city"];
   dataSource = this.firebaseService.dataSource;
+  // dataSource = new MatTableDataSource<User>();
   clickedRows = new Set<User>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -39,6 +40,18 @@ export class UserComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
+  sortData(column: string) {
+    const sortState: Sort = { active: column, direction: this.sort.direction === "asc" ? "desc" : "asc" };
+    this.sort.active = sortState.active;
+    this.sort.direction = sortState.direction;
+    this.sort.sortChange.emit(sortState);
   }
 
   openDialog() {

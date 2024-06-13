@@ -46,7 +46,6 @@ export class FirebaseService {
         const product = new Product(productData);
         this.allProducts.push(product);
       });
-      console.log("allProducts:", this.allProducts);
       this.dataSourceProducts.data = this.allProducts;
     });
   }

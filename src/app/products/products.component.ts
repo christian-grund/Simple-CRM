@@ -12,7 +12,7 @@ import { Product } from "../../models/product.class";
 import { FirebaseService } from "../services/firebase-services/firebase.service";
 import { MatPaginator, MatPaginatorModule } from "@angular/material/paginator";
 import { DialogEditProductComponent } from "./dialog-edit-product/dialog-edit-product.component";
-import { MatSort, MatSortModule } from "@angular/material/sort";
+import { MatSort, MatSortModule, Sort } from "@angular/material/sort";
 
 @Component({
   selector: "app-products",
@@ -39,7 +39,6 @@ export class ProductsComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    console.log("Paginator and Sort set", this.dataSource);
   }
 
   deleteProduct(product: Product) {
@@ -53,5 +52,17 @@ export class ProductsComponent implements AfterViewInit {
   openEditProductDialog(product: Product) {
     const dialog = this.dialog.open(DialogEditProductComponent);
     dialog.componentInstance.product = product;
+  }
+
+  sortData(column: string) {
+    const sortState: Sort = { active: column, direction: this.sort.direction === "asc" ? "desc" : "asc" };
+    this.sort.active = sortState.active;
+    this.sort.direction = sortState.direction;
+    this.sort.sortChange.emit(sortState);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 }

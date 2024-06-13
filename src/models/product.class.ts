@@ -9,7 +9,7 @@ export class Product {
   // ?: Object kann optional angelegt werden
   constructor(obj?: any) {
     this.name = obj ? obj.name : ""; // wenn object existiert, kommt obj.firstName rein, ansonsten '';
-    this.price = obj ? obj.price : 0;
+    this.price = obj ? Number(obj.price) : 0; // Umwandlung in Zahl
     this.type = obj ? obj.type : "";
     this.id = obj ? obj.id : "";
   }
